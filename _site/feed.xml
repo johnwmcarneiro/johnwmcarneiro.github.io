@@ -5,9 +5,67 @@
     <description>Empreendedor, Programador, Sonhador e Botafoguense.</description>
     <link>http://localhost:4000//</link>
     <atom:link href="http://localhost:4000//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 06 Dec 2017 14:25:23 -0300</pubDate>
-    <lastBuildDate>Wed, 06 Dec 2017 14:25:23 -0300</lastBuildDate>
+    <pubDate>Wed, 06 Dec 2017 14:42:48 -0300</pubDate>
+    <lastBuildDate>Wed, 06 Dec 2017 14:42:48 -0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Rails: Como acessar o contador em um renderização de coleção.</title>
+        <description>&lt;p&gt;Olá, hoje vou deixar aqui uma pequena dica, mas acho que de grande ajuda.&lt;/p&gt;
+
+&lt;p&gt;Como acessar o “contador” em um renderização de coleção.&lt;/p&gt;
+
+&lt;p&gt;As vezes me deparo com essa situação, pois tenho que adicionar os “rows” das colunas em um renderização html utilizando o bootstrap.&lt;/p&gt;
+
+&lt;p&gt;Então vamos lá, suponha que você tenha uma coleção com 8 artigos e que deseja que sejam exibidos 4 artigos por linha e que no loop do 5 artigo (ou início de cada linha) se adicione uma div “.row” para que o layout não “quebre”, então vamos ao exemplo código sem o contador e com o contador.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;View “index.html.erb”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Na view chamamos a coleção dos objetos, podemos fazer de duas formas.&lt;/p&gt;
+
+&lt;p&gt;A primeira informando o partial e passando a coleção.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;partial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;article&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;collection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@articles&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Ou na segunda, simplesmente passando a coleção, assumindo que “@articles” é um coleção de “Article”, então se poderia definir assim.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;row&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% render &lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@articles&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Partial “_article.html.erb”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Exemplo antes do uso do “counter”.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;col-md-3&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= article.title %&amp;gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;truncate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Ver mais&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Da forma como está acima ele poderia ficar alinhado 4 colunas e na quinta ele cair, mas imagine que um título ou texto tenha um tamanho diferente, poderia acabar “quebrando” a visualização, então nesse caso podemos utilizar o contador do laço criado na coleção. 
+O Rails fornece uma variável chamada “#{partial_name}_counter” para se utilizar no partial, em nosso exemplo essa varíavel seria “article_counter”, lembrando que inicia que o valor começa com 0.&lt;/p&gt;
+
+&lt;p&gt;Então vamos corrigir nosso partial &lt;strong&gt;&lt;em&gt;_article.html.erb&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= &amp;#39;&amp;lt;/div&amp;gt;&amp;lt;div class=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;.row&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html_safe&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;article_counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;sx&quot;&gt;&amp;lt;div class=&amp;quot;col-md-3&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;%= article.title %&amp;gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;truncate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;article&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Ver mais&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;article&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Chamando a variável “article_counter” podemos calcular o módulo por 4 e imprimir o fechamento e abertuda da div “.row”, sempre que se iniciar uma nova linha.&lt;/p&gt;
+
+&lt;p&gt;É isso, eu irei continuar publicando essas pequenas dicas sobre o que vou vendo no dia a dia com o Rails.&lt;/p&gt;
+
+&lt;p&gt;Valeu até a próxima.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 01 Dec 2017 18:00:00 -0300</pubDate>
+        <link>http://localhost:4000//rails/2017/12/01/rails-como-acessar-o-contador-em-um-renderizacao-de-colecao.html</link>
+        <guid isPermaLink="true">http://localhost:4000//rails/2017/12/01/rails-como-acessar-o-contador-em-um-renderizacao-de-colecao.html</guid>
+        
+        
+        <category>rails</category>
+        
+      </item>
     
       <item>
         <title>Rails: Utilizando o scope de outra classe na query.</title>

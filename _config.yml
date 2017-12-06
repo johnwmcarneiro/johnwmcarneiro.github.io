@@ -6,11 +6,11 @@ markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
-baseurl: /
+baseurl: http://johncarneiro.com
 domain_name: 'http://johncarneiro.com'
 google_analytics: 'UA-110790972-1'
 plugins: [jekyll-paginate]
 
 # Details for the RSS feed generator
-url: 'blog url'
+url: 'http://johncarneiro.com'
 author: 'John Carneiro'
