@@ -51,7 +51,7 @@ post_class: post-template
 
         {% if page.archive %}
         <section class="archive">
-            <h5>Archive</h5>
+            <h5>Arquivo</h5>
             <ul>
                 {% for post in site.posts %}
                     <li><span>{{ post.date | date_to_string }}</span>  <a href="{{ post.url }}">{{ post.title }}</a></li>
@@ -72,7 +72,8 @@ post_class: post-template
                     <h4> {{ site.author }} </h4>
                     <!-- Author Bio -->
                     <p>
-                        Here goes the author description. You might want to place some links too in here
+                        Empreendedor, Programador, Sonhador e Botafoguense.<br />
+                        Administrador por formação e desenvolvedor por vocação.
                     </p>
                 </section>
             {% endif %}

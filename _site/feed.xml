@@ -5,36 +5,113 @@
     <description>Empreendedor, Programador, Sonhador e Botafoguense.</description>
     <link>http://localhost:4000//</link>
     <atom:link href="http://localhost:4000//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 06 Dec 2017 14:01:57 -0300</pubDate>
-    <lastBuildDate>Wed, 06 Dec 2017 14:01:57 -0300</lastBuildDate>
+    <pubDate>Wed, 06 Dec 2017 14:25:23 -0300</pubDate>
+    <lastBuildDate>Wed, 06 Dec 2017 14:25:23 -0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory - edit this post and re-build (or run with the &lt;code&gt;-w&lt;/code&gt; switch) to see your changes!
-To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention: YYYY-MM-DD-name-of-post.ext.&lt;/p&gt;
+        <title>Rails: Utilizando o scope de outra classe na query.</title>
+        <description>&lt;p&gt;Hoje tive uma situação onde eu tinha a model “A” e fazia um join na model “B” e precisava utilizar um scope de B (para não ter quer duplicar código), então cheguei no método “Merge” do ActiveRecord, abaixo vou exemplificar como utilizar.&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;Imagine que tenhamos duas models, a primeira Offer (Oferta) e a segunda Lot (lote).&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;p&gt;Onde:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Cada oferta pode ter muitos lotes.&lt;/li&gt;
+  &lt;li&gt;O período de disponibilidade é definido em Lote.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Teríamos mais ou menos o seguinte cenário.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Fields&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# id&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# name (string)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# status (integer)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Offer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationRecord&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:inactive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:lots&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;span class=&quot;c1&quot;&gt;# fields&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# id (int)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# offer_id (int)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# start_date (datetime)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# end_date (datetime) &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Lot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationRecord&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:offer&lt;/span&gt;
 
+  &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;where&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;? BETWEEN lots.start_date AND lots.end_date&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Agora imagine que deseja buscar todas as ofertas ativas que possuam lotes, sendo assim facilmente conseguiríamos com o código abaixo:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@offers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Offer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:lots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Mas agora imagine que desejamos buscar todas as ofertas ativas, que tenha ligação com os lotes e que estes lotes estejam disponíveis. 
+Como faremos? 
+E se tentarmos chamar o scope “available” de “Lot” na query como no exemplo abaixo, o que aconteceria?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@offers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Offer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:lots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Provavelmente irá gerar um erro como esse “undefined method `only_available’ for &amp;lt;#Offer…”, não é mesmo? 
+Obviamente o método não está disponível para a model “Offer”, sendo assim como podemos fazer?&lt;/p&gt;
+
+&lt;p&gt;Então nesse caso podemos utilizar o método “merge”, ela permitir que façamos essa interseção. Então vamos para o código…&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@offers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Offer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;joins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:lots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Lot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Assim eles irá gerar uma SQL mais ou menos assim.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sql&quot; data-lang=&quot;sql&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offers&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;INNER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lots&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;DATA_ATUAL&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BETWEEN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start_date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lots&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end_date&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;GROUP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Agora percebe-se que ele gerou corretamente, pois ele lista as ofertas com lotes ligados, onde essa oferta deve ser ativa e a data atual deve estar dentro do período do lote.&lt;/p&gt;
+
+&lt;p&gt;Vale lembrar que utilizei o “GROUP BY” para evitar registros duplicados das ofertas, dado que ele faz um JOIN com os lotes e poderá ter mais de uma lote com período válido para cada oferta, gerando assim a duplicação de registros de oferta na listagem.&lt;/p&gt;
+
+&lt;p&gt;Você pode conferir o funcionamento do método “merge” através do link abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://api.rubyonrails.org/classes/ActiveRecord/SpawnMethods.html#method-i-merge&quot;&gt;http://api.rubyonrails.org/classes/ActiveRecord/SpawnMethods.html#method-i-merge&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Até a próximo!&lt;/p&gt;
 </description>
-        <pubDate>Sun, 10 Nov 2013 07:18:00 -0300</pubDate>
-        <link>http://localhost:4000//thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">http://localhost:4000//thriller/comedy/horror/2013/11/10/welcome-to-jekyll.html</guid>
+        <pubDate>Fri, 01 Dec 2017 18:00:00 -0300</pubDate>
+        <link>http://localhost:4000//rails/2017/12/01/rails-utilizando-o-scope-de-outra-classe-na-query.html</link>
+        <guid isPermaLink="true">http://localhost:4000//rails/2017/12/01/rails-utilizando-o-scope-de-outra-classe-na-query.html</guid>
         
         
-        <category>Thriller</category>
+        <category>rails</category>
         
-        <category>Comedy</category>
+      </item>
+    
+      <item>
+        <title>As vezes dê um tempo.</title>
+        <description>&lt;p&gt;Esse é o meu primeiro texto aqui e na verdade acho que é o meu primeiro texto em qualquer lugar, não sou muito de escrever…&lt;/p&gt;
+
+&lt;p&gt;Mas senti vontade de compartilhar sobre o que passei agora, pois nesse exato momento eu acho que fiquei “cego”, pois o problema estava bem na minha frente e eu não percebia a ÓBVIA solução.&lt;/p&gt;
+
+&lt;p&gt;Para quem já programou algum um projeto, já deve ter percebido como ficamos imersos entre linhas de código e “telas pretas”, mas também, certamente notou como apesar de todo o foco, as vezes parece como se um duende colocasse a solução sob uma faixa preta.&lt;/p&gt;
+
+&lt;p&gt;Fiquei mais de uma hora e meia, ou seja, mais de 90 minutos da minha vida, tentando resolver um problema que não existia por uma situação que imaginava ser diferente, simplesmente por um dia exaustivo de trabalho.&lt;/p&gt;
+
+&lt;p&gt;Qual foi a solução?&lt;/p&gt;
+
+&lt;p&gt;Levantei, me estiquei, fui ao banheiro, tomei uma água, liguei a TV e 10 minutos depois… “MEUS DEUS, como não percebi isso!”, voltei para o notebook e digitei “git status”, simplesmente descobri que não havia feito o “upload” do “Gemfile.lock” e o sistema acusava diferença entre o Gemfile e Gemfile.lock.&lt;/p&gt;
+
+&lt;p&gt;Moral da história, tão importante quanto se dedicar intensamente aos projetos você deve também dedicar um tempo para você e suas necessidades físicas.&lt;/p&gt;
+
+&lt;p&gt;A máquina as vezes falha e isso afeta sua produtividade.&lt;/p&gt;
+</description>
+        <pubDate>Wed, 27 Sep 2017 17:00:00 -0400</pubDate>
+        <link>http://localhost:4000//produtividade/2017/09/27/as-vezes-de-um-tempo.html</link>
+        <guid isPermaLink="true">http://localhost:4000//produtividade/2017/09/27/as-vezes-de-um-tempo.html</guid>
         
-        <category>Horror</category>
+        
+        <category>Produtividade</category>
         
       </item>
     
