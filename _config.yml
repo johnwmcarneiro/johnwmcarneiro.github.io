@@ -1,6 +1,6 @@
-name: Your New Jekyll Site
-description: Blogging about stuffs
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
+name: John Carneiro
+description: Empreendedor, Programador, Sonhador e Botafoguense.
+meta_description: "Blog pessoal para falar sobre empreendedorismo e tecnologia. Me chamo John e trabalho com desenvolvimento desde os 17 anos e sou aficionado por empreendedorismo."
 
 markdown: kramdown
 highlighter: pygments
@@ -9,7 +9,7 @@ paginate: 15
 baseurl: /
 domain_name: 'http://johncarneiro.com'
 google_analytics: 'UA-110790972-1'
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
 
 # Details for the RSS feed generator
 url: 'blog url'
