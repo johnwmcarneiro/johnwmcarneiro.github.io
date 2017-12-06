@@ -6,7 +6,7 @@ markdown: kramdown
 highlighter: pygments
 logo: false
 paginate: 15
-baseurl: http://johncarneiro.com
+baseurl: "/"
 domain_name: 'http://johncarneiro.com'
 google_analytics: 'UA-110790972-1'
 plugins: [jekyll-paginate]
