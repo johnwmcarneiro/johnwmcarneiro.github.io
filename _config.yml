@@ -9,6 +9,7 @@ paginate: 15
 baseurl: "/"
 domain_name: 'http://johncarneiro.com'
 google_analytics: 'UA-110790972-1'
+profile_file: '/assets/images/profile.jpg'
 plugins: [jekyll-paginate]
 
 # Details for the RSS feed generator

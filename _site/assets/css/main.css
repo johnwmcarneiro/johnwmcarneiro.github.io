@@ -196,3 +196,10 @@
     color: #008080; }
   .highlight .il {
     color: #009999; }
+
+.main-header-content .author-image {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  top: 0;
+  margin-left: -75px; }
