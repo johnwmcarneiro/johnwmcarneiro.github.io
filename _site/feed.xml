@@ -5,9 +5,31 @@
     <description>Empreendedor, Programador, Sonhador e Botafoguense.</description>
     <link>http://localhost:4000//</link>
     <atom:link href="http://localhost:4000//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Dec 2017 10:57:10 -0300</pubDate>
-    <lastBuildDate>Mon, 11 Dec 2017 10:57:10 -0300</lastBuildDate>
+    <pubDate>Mon, 18 Dec 2017 00:12:27 -0300</pubDate>
+    <lastBuildDate>Mon, 18 Dec 2017 00:12:27 -0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>MVP e Validação.</title>
+        <description>&lt;p&gt;Olá hoje vou falar um pouco sobre mvp e validação, decidi escrever um pouco sobre esse assunto
+após uma situação com um cliente.&lt;/p&gt;
+
+&lt;p&gt;Então primeiro vamos para as definições.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;O que é validação?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;O que é MVP?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Caso famosos de MVP e Validação&lt;/strong&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 17 Dec 2017 06:00:00 -0300</pubDate>
+        <link>http://localhost:4000//startup/2017/12/17/mvp-e-validacao.html</link>
+        <guid isPermaLink="true">http://localhost:4000//startup/2017/12/17/mvp-e-validacao.html</guid>
+        
+        
+        <category>startup</category>
+        
+      </item>
     
       <item>
         <title>Rails: Como acessar o contador em um renderização de coleção.</title>
