@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Rails: Como acessar o contador em um renderização de coleção."
-date:   2017-12-01 21:00:00
+date:   2017-12-01 21:00:00 -0400
 categories: rails
 ---
 

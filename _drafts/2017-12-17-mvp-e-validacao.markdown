@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "MVP e Validação."
-date:   2017-12-17 09:00:00
+date:   2017-12-17 09:00:00 -0400
 categories: startup
 ---
 

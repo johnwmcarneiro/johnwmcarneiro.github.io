@@ -5,29 +5,36 @@
     <description>Empreendedor, Programador, Sonhador e Botafoguense.</description>
     <link>http://localhost:4000//</link>
     <atom:link href="http://localhost:4000//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Dec 2017 00:18:14 -0300</pubDate>
-    <lastBuildDate>Mon, 18 Dec 2017 00:18:14 -0300</lastBuildDate>
+    <pubDate>Wed, 24 Jan 2018 16:25:31 -0300</pubDate>
+    <lastBuildDate>Wed, 24 Jan 2018 16:25:31 -0300</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
-        <title>MVP e Validação.</title>
-        <description>&lt;p&gt;Olá hoje vou falar um pouco sobre mvp e validação, decidi escrever um pouco sobre esse assunto
-após uma situação com um cliente.&lt;/p&gt;
+        <title>Livro: Receita Previsível</title>
+        <description>&lt;p&gt;Vou falar nesse post sobre alguns pontos que aprendi com o livro “Receita Previsível” do Aaron Ross e Marylou Tyler, confesso que comprei o livro no impulso, vi a recomendação em algum post sobre receita recorrente, então imaginei que o livro se tratava basicamente sobre o modelo SaaS e a venda por recorrência, mas não é bem disso que se trata, acabei me surpreendendo de forma muito positiva.&lt;/p&gt;
 
-&lt;p&gt;Então primeiro vamos para as definições.&lt;/p&gt;
+&lt;p&gt;Gosto muito de assuntos relacionadas a vendas, marketing, gestão e empreendedorismo, no livro acho que tem um pouco de tudo, mas embasado em uma postura pró-ativa, transparente e moderna de vendas.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;O que é validação?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;O livro começa definindo conceitos e siglas, explicando sobre o Cold Call 2.0, a diferença com o Cold Call comum e como implementá-lo, explica também sobre como transformou um processo de vendas comum em etapas menores e funções específicas gerando grandes benefícios, essa parte do livro acho que foi a que mais gostei, da divisão do que um vendedor faz em basicamente duas funções, deixando a cargo de um a prospecção ativa e ao segundo realizar a validação das oportunidades e a responsabilidade pelo fechamento da proposta.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;O que é MVP?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;O autor trata também sobre planejamento e definição do perfil ideial de cliente para empresa, como ele mesmo cita diversas vezes, “Escolha um nicho e fique rico”, destacando a importância do perfil do cliente para conversão de um prospect em uma oportunidade válida. No livro fica claro sobre como remunerar essa equipe e como uso de um bom CRM pode auxiliar no processo de vendas.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Caso famosos de MVP e Validação&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Mas o livro não trata somente de vendas outbound, nele tem um capítulo escrito por um membro da HubSpot, explicando sobre como gerar um fluxo estável de leads por inbound, no final fecha com um capítulo falando sobre como ter projetos e equipes autogeridas através da liberdade.&lt;/p&gt;
+
+&lt;p&gt;Uffa, tem bastante coisa!&lt;/p&gt;
+
+&lt;p&gt;Sinceramente gostei muito do livro, vale a pena ler e recomendo caso não tenha lido.&lt;/p&gt;
+
+&lt;p&gt;Foi só um pequeno post, não diria que foi um resumo pois é muito superficial para a quantidade de lições valiosas encontradas no livro, mas achei interessante deixar a dica e minha recomendação para leitura.&lt;/p&gt;
+
+&lt;p&gt;Então pessoal, obrigado e até a próxima!&lt;/p&gt;
 </description>
-        <pubDate>Sun, 17 Dec 2017 06:00:00 -0300</pubDate>
-        <link>http://localhost:4000//startup/2017/12/17/mvp-e-validacao.html</link>
-        <guid isPermaLink="true">http://localhost:4000//startup/2017/12/17/mvp-e-validacao.html</guid>
+        <pubDate>Wed, 24 Jan 2018 14:00:00 -0300</pubDate>
+        <link>http://localhost:4000//livros/2018/01/24/livro-receita-previsivel.html</link>
+        <guid isPermaLink="true">http://localhost:4000//livros/2018/01/24/livro-receita-previsivel.html</guid>
         
         
-        <category>startup</category>
+        <category>livros</category>
         
       </item>
     
@@ -80,7 +87,7 @@ O Rails fornece uma variável chamada “#{partial_name}_counter” para se util
 
 &lt;p&gt;Valeu até a próxima.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 01 Dec 2017 18:00:00 -0300</pubDate>
+        <pubDate>Fri, 01 Dec 2017 22:00:00 -0300</pubDate>
         <link>http://localhost:4000//rails/2017/12/01/rails-como-acessar-o-contador-em-um-renderizacao-de-colecao.html</link>
         <guid isPermaLink="true">http://localhost:4000//rails/2017/12/01/rails-como-acessar-o-contador-em-um-renderizacao-de-colecao.html</guid>
         
@@ -159,7 +166,7 @@ Obviamente o método não está disponível para a model “Offer”, sendo assi
 
 &lt;p&gt;Até a próximo!&lt;/p&gt;
 </description>
-        <pubDate>Fri, 01 Dec 2017 18:00:00 -0300</pubDate>
+        <pubDate>Fri, 01 Dec 2017 22:00:00 -0300</pubDate>
         <link>http://localhost:4000//rails/2017/12/01/rails-utilizando-o-scope-de-outra-classe-na-query.html</link>
         <guid isPermaLink="true">http://localhost:4000//rails/2017/12/01/rails-utilizando-o-scope-de-outra-classe-na-query.html</guid>
         
@@ -191,7 +198,7 @@ Obviamente o método não está disponível para a model “Offer”, sendo assi
         <guid isPermaLink="true">http://localhost:4000//produtividade/2017/09/27/as-vezes-de-um-tempo.html</guid>
         
         
-        <category>Produtividade</category>
+        <category>produtividade</category>
         
       </item>
     

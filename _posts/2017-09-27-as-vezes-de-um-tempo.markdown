@@ -2,7 +2,7 @@
 layout: post
 title:  "As vezes dê um tempo."
 date:   2017-09-27 21:00:00
-categories: Produtividade
+categories: produtividade
 ---
 
 Esse é o meu primeiro texto aqui e na verdade acho que é o meu primeiro texto em qualquer lugar, não sou muito de escrever…
